@@ -1,0 +1,19 @@
+package io.github.serpro69.kfaker.provider
+
+import io.github.serpro69.kfaker.FakerService
+import io.github.serpro69.kfaker.dictionary.CategoryName
+import io.github.serpro69.kfaker.provider.unique.LocalUniqueDataProvider
+import io.github.serpro69.kfaker.provider.unique.UniqueProviderDelegate
+
+/**
+ * [FakeDataProvider] implementation for [CategoryName.APPLIANCE] category.
+ */
+@Suppress("unused")
+class Appliance internal constructor(fakerService: FakerService) : AbstractFakeDataProvider<Appliance>(fakerService) {
+    override val categoryName = CategoryName.APPLIANCE
+    override val localUniqueDataProvider = LocalUniqueDataProvider<Appliance>()
+    override val unique by UniqueProviderDelegate(localUniqueDataProvider)
+
+    fun brand() = resolve("brand")
+    fun equipment() = resolve("equipment")
+}

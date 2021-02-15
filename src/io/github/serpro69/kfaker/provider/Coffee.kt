@@ -1,0 +1,22 @@
+package io.github.serpro69.kfaker.provider
+
+import io.github.serpro69.kfaker.FakerService
+import io.github.serpro69.kfaker.dictionary.CategoryName
+import io.github.serpro69.kfaker.provider.unique.LocalUniqueDataProvider
+import io.github.serpro69.kfaker.provider.unique.UniqueProviderDelegate
+
+/**
+ * [FakeDataProvider] implementation for [CategoryName.COFFEE] category.
+ */
+@Suppress("unused")
+class Coffee internal constructor(fakerService: FakerService) : AbstractFakeDataProvider<Coffee>(fakerService) {
+    override val categoryName = CategoryName.COFFEE
+    override val localUniqueDataProvider = LocalUniqueDataProvider<Coffee>()
+    override val unique by UniqueProviderDelegate(localUniqueDataProvider)
+
+    fun country() = resolve("country")
+    fun regions(country: String) = resolve("regions", country.toLowerCase())
+    fun variety() = resolve("variety")
+    fun notes() = resolve("notes")
+    fun blendName() = resolve("blend_name")
+}
